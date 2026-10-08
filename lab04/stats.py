@@ -16,3 +16,13 @@ def parse_record(line: str):
     }
     return dict
 
+def read_valid(lines: list[str]):
+    l = []
+    for line in lines:
+        if not(line.strip()):
+            continue
+        try:
+            l.append(parse_record(line))
+        except ValueError:
+            pass
+    return l
