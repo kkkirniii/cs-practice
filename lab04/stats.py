@@ -1,12 +1,12 @@
 def parse_record(line: str):
-    words = line.split(';')
+    words = [word.strip() for word in line.split(';')]
 
     if len(words)!=3:
         raise ValueError('Негодная строка. Должно быть ровно 3 разделителя.')
     if not(words[0]) or not(words[2]):
         raise ValueError('Негодная строка. Поля города или даты пустые.')
     try:
-        temp = float(words[1])
+        temp = float(words[1].replace(',','.'))
     except ValueError:
         raise ValueError('Негодная строка. Температура должна быть числом.')
     dict = {
