@@ -1,14 +1,17 @@
-def parse_event(line):
-    line = line.strip()
-    parts = line.split(' ', 2)
+def parse_event(line: str) -> dict:
+    parts = line.strip().split(maxsplit=2)
     if len(parts) != 3:
         raise ValueError
-    for i in range(3):
-        if parts[i].strip() == '':
-            raise ValueError
-    if parts[1] not in ['DEBUG', 'INFO', 'WARNING', 'ERROR']:
+    time, level, message = parts
+    if level not in {'DEBUG', 'INFO', 'WARNING', 'ERROR'}:
         raise ValueError
-    return {'time': parts[0],'level': parts[1],'message': parts[2]}
+    if not message:
+        raise ValueError
+    return {
+        'time': time,
+        'level': level,
+        'message': message,
+    }
 
 def count_levels(lines):
     counts = {}
