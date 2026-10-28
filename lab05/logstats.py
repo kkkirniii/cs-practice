@@ -1,4 +1,5 @@
 def parse_event(line):
+    line = line.strip()
     parts = line.split(' ', 2)
     if len(parts) != 3:
         raise ValueError
